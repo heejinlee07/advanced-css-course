@@ -19,21 +19,50 @@ is to change the box model so that the borders and
 the paddings are no longer added to the total width or the total height
 */
 
-* {
+/* 가상 요소에 대한 지정을 따로 해주지 않으면 real elements에 대해서만 스타일링이 적용된다. */
+*,
+*::after,
+*::before {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  /* force inheritance */
+  box-sizing: inherit;
+}
+
+/* 1rem = 10px */
+/* 
+reponsive design 적용이 쉬워진다.
+font-size만 바꿔도 rem으로 모든 사이즈가 계산되기 때문에 
+바뀐 값에 따라 나머지 사이즈가 저절로 조정된다.
+*/
+
+/*
+font-size를 100%로 적용하면 
+사용자가 임의로 font-size를 조절할 경우 그에 맞는
+사이즈로 적용된다. 20px -> 20px
+브라우저의 default font-size는 16px이다.
+
+그런데 16px이 아닌 10px의 값을 적용하고 싶기 때문에
+10을 16으로 나눈다.
+10/16 = 0.625 -> 0.625 * 100 => 62.5%
+
+단, IE에서는 rem을 쓸 수 없다.
+
+*/
+html {
+  font-size: 62.5%;
 }
 
 /* inheritance */
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  /* font-size: 16px; */
   line-height: 1.7;
   /* it's 1.7 times bigger than the predefined line height */
   color: #777;
-  padding: 30px;
+  padding: 3rem;
+  box-sizing: border-box;
 }
 
 .header {
@@ -56,17 +85,17 @@ should be 95% of the viewport height
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
 }
 
-.logo-box {
+.header__logo-box {
   position: absolute;
-  top: 40px;
-  left: 40px;
+  top: 4rem;
+  left: 4rem;
 }
 
-.logo {
-  height: 35px;
+.header__logo {
+  height: 3.5rem;
 }
 
-.text-box {
+.header__text-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -80,14 +109,14 @@ should be 95% of the viewport height
   text-transform: uppercase;
 
   backface-visibility: hidden;
-  margin-bottom: 60px;
+  margin-bottom: 6rem;
 }
 
-.heading-primary-main {
+.heading-primary--main {
   display: block;
-  font-size: 60px;
+  font-size: 6rem;
   font-weight: 400;
-  letter-spacing: 35px;
+  letter-spacing: 3.5rem;
 
   animation-name: moveInLeft;
   animation-duration: 1s;
@@ -99,11 +128,11 @@ should be 95% of the viewport height
   */
 }
 
-.heading-primary-sub {
+.heading-primary--sub {
   display: block;
-  font-size: 20px;
+  font-size: 2rem;
   font-weight: 700;
-  letter-spacing: 17.4px;
+  letter-spacing: 1.75rem;
 
   animation: moveInRight 1s ease-out;
 }
@@ -112,10 +141,10 @@ should be 95% of the viewport height
 @keyframes moveInLeft {
   0% {
     opacity: 0;
-    transform: translateX(-100px);
+    transform: translateX(-10rem);
   }
   80% {
-    transform: translateX(10px);
+    transform: translateX(1rem);
   }
   100% {
     opacity: 1;
@@ -126,10 +155,10 @@ should be 95% of the viewport height
 @keyframes moveInRight {
   0% {
     opacity: 0;
-    transform: translateX(100px);
+    transform: translateX(10rem);
   }
   80% {
-    transform: translateX(-10px);
+    transform: translateX(-1rem);
   }
   100% {
     opacity: 1;
@@ -140,7 +169,7 @@ should be 95% of the viewport height
 @keyframes moveInBottom {
   0% {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(3rem);
   }
   100% {
     opacity: 1;
@@ -152,24 +181,26 @@ should be 95% of the viewport height
 .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
-  padding: 15px 40px;
+  padding: 1.5rem 4rem;
   display: inline-block;
-  border-radius: 100px;
+  border-radius: 10rem;
   transition: all 0.2s;
   position: relative;
+  font-size: 1.6rem;
 }
 
 .btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-0.3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
 }
 
+/* 0.5의 경우 0은 쓰지 않아도 된다. */
 .btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
 
-.btn-white {
+.btn--white {
   background-color: #fff;
   color: #777;
 }
@@ -179,7 +210,7 @@ should be 95% of the viewport height
   display: inline-block;
   height: 100%;
   width: 100%;
-  border-radius: 100px;
+  border-radius: 10rem;
   position: absolute;
   top: 0;
   left: 0;
@@ -188,7 +219,7 @@ should be 95% of the viewport height
   transition: all 0.4s;
 }
 
-.btn-white::after {
+.btn--white::after {
   background-color: #fff;
 }
 
@@ -198,7 +229,7 @@ should be 95% of the viewport height
   opacity: 0;
 }
 
-.btn-animated {
+.btn--animated {
   animation: moveInBottom 0.5s ease-out 0.75s;
   animation-fill-mode: backwards;
 }
