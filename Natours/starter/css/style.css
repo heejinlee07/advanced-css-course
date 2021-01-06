@@ -19,6 +19,8 @@ is to change the box model so that the borders and
 the paddings are no longer added to the total width or the total height
 */
 
+/* Bem 표기법 - Block / Element / Modifier */
+
 /* 가상 요소에 대한 지정을 따로 해주지 않으면 real elements에 대해서만 스타일링이 적용된다. */
 *,
 *::after,
