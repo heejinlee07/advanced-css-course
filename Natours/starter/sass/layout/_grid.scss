@@ -1,7 +1,6 @@
 .row {
   //rem을 쓰고 있으니 1140px로 쓰지말고 10으로 나누어야함.
   max-width: $grid-width;
-  background-color: #eee;
   margin: 0 auto;
 
   //마지막 자식만 margin-bottom 적용안함.
@@ -17,7 +16,6 @@
   //'$' -> 끝을 의미 'class$="col-"' -> col-으로 끝나는 클래스 명을 의미
 
   [class^="col-"] {
-    background-color: orangered;
     float: left;
 
     &:not(:last-child) {
