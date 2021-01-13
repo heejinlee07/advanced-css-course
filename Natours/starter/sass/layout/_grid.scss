@@ -6,6 +6,13 @@
   //마지막 자식만 margin-bottom 적용안함.
   &:not(:last-child) {
     margin-bottom: $gutter-vertical;
+    @include respond(tab-port) {
+      margin-bottom: $gutter-vertical-small;
+    }
+  }
+
+  @include respond(tab-port) {
+    min-width: 50rem;
   }
 
   @include clearfix;
@@ -20,6 +27,15 @@
 
     &:not(:last-child) {
       margin-right: $gutter-horizontal;
+      margin-bottom: $gutter-vertical-small;
+
+      @include respond(tab-port) {
+        margin-right: 0;
+      }
+    }
+
+    @include respond(tab-port) {
+      width: 100% !important;
     }
   }
 
