@@ -200,7 +200,7 @@
 .overview {
   display: flex;
   align-items: center;
-  border-bottom: 1px solid var(--color-grey-light-2);
+  border-bottom: var(--line);
 
   &__heading {
     font-size: 2.25rem;
@@ -295,5 +295,81 @@
   100% {
     transform: scale(1);
     box-shadow: none;
+  }
+}
+
+//? paragraph
+.paragraph:not(:last-of-type) {
+  margin-bottom: 2rem;
+}
+
+//? list
+.list {
+  list-style: none;
+  margin: 3rem 0;
+  padding: 3rem 0;
+  border-top: var(--line);
+  border-bottom: var(--line);
+
+  display: flex;
+  flex-wrap: wrap;
+
+  //다단을 나눌 때.
+  &__item {
+    flex: 0 0 50%;
+    margin-bottom: 0.7rem;
+  }
+
+  //html 마크업 작성없이 곧장 svg파일을 주입하는 방법
+  &__item::before {
+    content: "";
+    display: inline-block;
+    height: 1rem;
+    width: 1rem;
+    margin-right: 0.7rem;
+
+    //older browsers
+    // background-image: url(../img/chevron-thin-right.svg);
+    // background-size: cover;
+
+    //*newer browsers - masks
+    // basically a mask defines an area where we can look through the element
+    // and see what's behind that element. like clipping
+    background-color: var(--color-primary);
+    -webkit-mask-image: url(../img/chevron-thin-right.svg);
+    -webkit-mask-size: cover;
+    mask-image: url(../img/chevron-thin-right.svg);
+    mask-size: cover;
+  }
+}
+
+//? recommend
+.recommend {
+  font-size: 1.3rem;
+  color: var(--color-grey-dark-3);
+
+  display: flex;
+  align-items: center;
+
+  &__count {
+    margin-right: auto;
+  }
+
+  &__friends {
+  }
+
+  &__photo {
+    //  box-sizing: border-box가 전체에 먹혀있어서 border를 설정하니까
+    // 이미지가 shrink되는 현상이 있다. 그래서 여기서만 content-box를 설정한다.
+    box-sizing: content-box;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+    border: 3px solid #fff;
+
+    //이미지 겹치기
+    &:not(:last-child) {
+      margin-right: -1.5rem;
+    }
   }
 }
