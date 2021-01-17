@@ -407,6 +407,7 @@
       -webkit-mask-size: cover;
       mask-image: url(../img/chevron-thin-right.svg);
       mask-size: cover;
+      //old&newer 모두에 적용될 수 있도록
       background-image: none;
     }
   }
